@@ -1,6 +1,6 @@
 # nanoGPT-Vision
 
-**ChatGPT4o–like Vision AI that $100 can buy.**
+> ChatGPT4o–like Vision AI that $100 can buy.
 
 ## [Link to WebUI](https://huggingface.co/spaces/HayatoHongoEveryonesAI/EveryonesGPT_Vision_Pretrained)
 
