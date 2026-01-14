@@ -57,6 +57,50 @@ All numbers below are **actual runs**, not estimates.
 
 # How to build your own Vision Language Model
 
+
+If you have not implemented nanoGPT yet, Learn on Colab!
+
+[Everyones_nanoGPT](https://github.com/HayatoHongo/Everyones_nanoGPT/tree/main)
+
+| Chapter  | Estimated Time | English 🇺🇸 |
+|---|---|---|
+| Chapter 00: Start Tutorial      | 1-2 hour    | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/main/notebooks/todo/Everyones_nanoGPT_colab_Chapter00_todo.ipynb) |
+| Chapter 01: Dataloader         | 1-2 hour    | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/main/notebooks/todo/Everyones_nanoGPT_colab_Chapter01_todo.ipynb) |
+| Chapter 02: TokenEmbedding     | 0.5-1 hour  | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/main/notebooks/todo/Everyones_nanoGPT_colab_Chapter02_todo.ipynb) |
+| Chapter 03: PositionEmbedding  | 0.5-1 hour  | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/main/notebooks/todo/Everyones_nanoGPT_colab_Chapter03_todo.ipynb) |
+| Chapter 04: EmbeddingModule    | 0.5-1 hour  | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/main/notebooks/todo/Everyones_nanoGPT_colab_Chapter04_todo.ipynb) |
+| Chapter 05: LayerNorm          | 1-2 hour    | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/main/notebooks/todo/Everyones_nanoGPT_colab_Chapter05_todo.ipynb) |
+| Chapter 06: AttentionHead      | 3-4 hour    | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/main/notebooks/todo/Everyones_nanoGPT_colab_Chapter06_todo.ipynb) |
+| Chapter 07: MultiHeadAttention | 1-2 hour    | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/main/notebooks/todo/Everyones_nanoGPT_colab_Chapter07_todo.ipynb) |
+| Chapter 08: FeedForward        | 1-2 hour    | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/main/notebooks/todo/Everyones_nanoGPT_colab_Chapter08_todo.ipynb) |
+| Chapter 09: TransformerBlock   | 0.5-1 hour  | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/main/notebooks/todo/Everyones_nanoGPT_colab_Chapter09_todo.ipynb) |
+| Chapter 10: VocabularyLogits   | 0.5-1 hour  | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/main/notebooks/todo/Everyones_nanoGPT_colab_Chapter10_todo.ipynb) |
+| Chapter 11: nanoGPT| 1-2 hour    | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/main/notebooks/todo/Everyones_nanoGPT_colab_Chapter11_todo.ipynb) |
+| Chapter 12: Trainer            | 1-2 hour    | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/main/notebooks/todo/Everyones_nanoGPT_colab_Chapter12_todo.ipynb) |
+
+Sorry the following is in Japanes. Translation is undergoing!
+
+### nanoGPTをさらに発展させてllama3.2を目指す
+
+**Free T4 GPU on colab!😊**
+
+| チャプター  | 推定所要時間 | ノートブック  |
+|---|---|---|
+| Chapter 13: Tokens per second(CPU)    | 1~2時間 | [![Colabで開く](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/ja/notebooks/todo/Everyones_nanoGPT_colab_Chapter13_todo_ja.ipynb) |          |
+| Chapter 14: Tokens per second(T4 GPU)     | 0.5〜1時間 | [![Colabで開く](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/ja/notebooks/todo/Everyones_nanoGPT_colab_Chapter14_todo_ja.ipynb) |          |
+| Chapter 15: Train nanoGPT with GPU    | 0.5〜1時間    | [![Colabで開く](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/ja/notebooks/todo/Everyones_nanoGPT_colab_Chapter15_todo_ja.ipynb) |          |
+| Chapter 16: モデルサイズだけ大きくする          | 0.5 ~ 1 時間 (+ モデル学習 1時間)  | [![Colabで開く](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/ja/notebooks/todo/Everyones_nanoGPT_colab_Chapter16_todo_ja.ipynb) |          |
+| Chapter 17:  データセットを大きくする    | 1〜2時間 (+ モデル学習 1時間) | [![Colabで開く](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/ja/notebooks/todo/Everyones_nanoGPT_colab_Chapter17_todo_ja.ipynb) |          |
+| Chapter 18: tiktoken      | 1〜2時間 (+ モデル学習 1時間)   | [![Colabで開く](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/ja/notebooks/todo/Everyones_nanoGPT_colab_Chapter18_todo_ja.ipynb) |          |
+| Chapter 19: Long Train    | 1〜2時間 (+ モデル学習 **6時間** )  | [![Colabで開く](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/ja/notebooks/todo/Everyones_nanoGPT_colab_Chapter19_todo_ja.ipynb) |          |
+| Chapter 20: 学習率            | 0.5〜1時間   | [![Colabで開く](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/ja/notebooks/todo/Everyones_nanoGPT_colab_Chapter20_todo_ja.ipynb) |          |
+| Chapter 21: Scaling Law       | 1〜2時間 | [![Colabで開く](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/ja/notebooks/todo/Everyones_nanoGPT_colab_Chapter21_todo_ja.ipynb) |          |
+| Chapter 22: TinyStories(メイン) | 1〜2時間   | [![Colabで開く](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/ja/notebooks/todo/Everyones_nanoGPT_colab_Chapter22_main_todo_ja.ipynb) |          |
+| Chapter 22: TinyStories(モデル学習) | 1時間   | [![Colabで開く](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/ja/notebooks/todo/Everyones_nanoGPT_colab_Chapter22_train_todo_ja.ipynb) |          |
+| Chapter 23: RPE(OverSimplified) | 2~3時間   | [![Colabで開く](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/ja/notebooks/todo/Everyones_nanoGPT_colab_Chapter23_todo_ja.ipynb) |          |
+| Chapter 24: RPE(Simplified)        | 1〜2時間 (+ モデル学習 1時間)      | [![Colabで開く](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HayatoHongo/Everyones_nanoGPT/blob/ja/notebooks/todo/Everyones_nanoGPT_colab_Chapter24_todo_ja.ipynb) |
+
+
 ### 1. Language Pretraining
 
 - Model: GPT-style language model
