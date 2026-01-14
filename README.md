@@ -79,6 +79,16 @@ https://colab.research.google.com/drive/1CvgpTAJzpsZjraCSxJ8phYyAmSMw-LwJ?usp=sh
 - Time: **~3 hours**
 - Cost: **~$2**
 
+Available on Colab!
+
+https://colab.research.google.com/drive/1QR8ygk2RsGuDt9w8Nmz0Zn8aC6MBYoD6?usp=sharing
+
+
+#### Inference
+
+Available on Colab!
+
+https://colab.research.google.com/drive/1GK9y0BAt2Xdyploc5B55kyNlxyZuwckQ?usp=sharing
 
 
 ### 4.  Vision pretraining (for the Vision Pretrained model)
