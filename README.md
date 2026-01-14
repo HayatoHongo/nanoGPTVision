@@ -1,6 +1,10 @@
-# nanoGPTVision
+# nanoGPT-Vision
 
-**ChatGPT-4o–like Vision AI that $100 can buy.**
+**ChatGPT4o–like Vision AI that $100 can buy.**
+
+## [Link to WebUI](https://huggingface.co/spaces/HayatoHongoEveryonesAI/EveryonesGPT_Vision_Pretrained)
+
+![app_chat.png](app_chat.png)
 
 ⚠️ **Status: actively being cleaned up and documented.**
 The core ideas and training runs are real and reproducible,  
@@ -53,12 +57,18 @@ All numbers below are **actual runs**, not estimates.
 
 # How to build your own Vision Language Model
 
+### 1. Language Pretraining
+
 - Model: GPT-style language model
 - Hardware: **Lambda Cloud A100 × 8**
 - Time: **~6 hours**
 - Cost: **~$90**
 
+## WebUI
 
+Please clone this huggingface space and replace the model checkpoint with your one.
+
+https://huggingface.co/spaces/HayatoHongoEveryonesAI/EveryonesGPT_Pretrained
 
 ---
 
@@ -71,6 +81,13 @@ All numbers below are **actual runs**, not estimates.
 Available on Colab!
 
 https://colab.research.google.com/drive/1CvgpTAJzpsZjraCSxJ8phYyAmSMw-LwJ?usp=sharing
+
+
+## WebUI
+
+Please clone this huggingface space and replace the model with your one.
+
+https://huggingface.co/spaces/HayatoHongoEveryonesAI/EveryonesGPT_SFT
 
 ---
 
@@ -90,10 +107,19 @@ Available on Colab!
 
 https://colab.research.google.com/drive/1GK9y0BAt2Xdyploc5B55kyNlxyZuwckQ?usp=sharing
 
+#### Web UI
 
-### 4.  Vision pretraining (for the Vision Pretrained model)
+Please clone this huggingface space and replace the model checkpoint with your one.
+
+https://huggingface.co/spaces/HayatoHongoEveryonesAI/EveryonesGPT_Vision_Pretrained
+
+
+
+### 4.  Vision Instruction Tuning (for the Vision Pretrained model)
 
 Still under construction! please wait! we will release in January!
+
+
 
 ---
 
@@ -107,13 +133,16 @@ Still under construction! please wait! we will release in January!
 - [x] From-scratch text decoder
 - [x] CLIP-based vision encoder
 - [x] Vision-language pretraining
-- [ ] Expanded multimodal instruction tuning (WIP)
+- [ ] Expanded Vision instruction tuning (WIP)
 - [ ] Code cleanup & documentation (in progress)
+- [ ] Build Clip from scratch
 
 ## Acknowledgements
 
-- **Andrej Karpathy** — nanoGPT and its philosophy
+- Andrej Karpathy — nanoGPT, nanoChat(for streaming) and its philosophy
 - OpenAI — CLIP
+- Haotian Liu - LLaVA
+- Sebastian Raschka - LLM SFT 
 
 
 This repository is provided for research and educational purposes.
