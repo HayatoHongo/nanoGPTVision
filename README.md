@@ -192,7 +192,6 @@ https://huggingface.co/spaces/HayatoHongoEveryonesAI/EveryonesGPT_Pretrained
 ---
 
 ### 2. Language SFT
-- Vision encoder: **OpenAI CLIP**
 - Hardware: **Google Colab Pro – A100 (high memory)**
 - Time: **~5 hours**
 - Cost: **~$4**
