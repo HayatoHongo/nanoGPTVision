@@ -282,8 +282,8 @@ We excluded these techniques as uncritical
 ## Acknowledgements
 
 # Dataset
-- HuggingFace Team - FineWeb-Edu Dataset
-- ShallowU - FineWeb-Edu Dataset in numpy format
+- HuggingFace Team - FineWeb-Edu Dataset https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu
+- ShallowU - FineWeb-Edu Dataset in numpy format https://huggingface.co/datasets/ShallowU/FineWeb-Edu-10B-Tokens-NPY
 - Haotian Liu - LLaVA Pretrain Dataset (whitelisted version was used) https://huggingface.co/datasets/HayatoHongo/LLaVA-CC3M-Pretrain-521K
 - Magpie Team - https://huggingface.co/datasets/Magpie-Align/Magpie-Phi3-Pro-1M-v0.1
 - roneneldan - https://huggingface.co/datasets/roneneldan/TinyStories
