@@ -5,7 +5,7 @@
 ![Demo](assets/demo.gif)
 
 
-## [▶️ Link to WebUI](https://huggingface.co/spaces/HayatoHongoEveryonesAI/EveryonesGPT_Vision_Pretrained)
+## [▶️ Link to WebUI](https://huggingface.co/spaces/HayatoHongoEveryonesAI/EveryonesGPT_Vision_Instruct)
 
 ⚠️ **Status: actively being cleaned up and documented.**
 The core ideas and training runs are real and reproducible,  
