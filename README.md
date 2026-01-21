@@ -234,7 +234,7 @@ https://huggingface.co/spaces/HayatoHongoEveryonesAI/EveryonesGPT_Vision_Pretrai
 ### 4.  Vision Instruction Tuning (for the Vision Pretrained model)
 - Hardware: **Google Colab Pro – A100 (high memory)**
 - Time: **~2 hours**
-- Cost: **~$1~2**
+- Cost: **~$2**
 
 Available on Colab!
 
