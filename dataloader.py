@@ -1,5 +1,8 @@
 # dataloader.py
-# refactored dataloader with train/val separation and DDP support
+# refactored dataloader with train/val separation
+# NOTE:
+# We assume shards are pre-shuffled and pre-encoded into `.npy` files.
+# This loader is designed for single-process / single-GPU runs.
 
 import os
 import torch
@@ -16,12 +19,6 @@ class DataLoader:
         """
         self.config = config
         self.data_dir = data_dir
-
-        
-        import torch.distributed as dist
-        self.rank = dist.get_rank() if dist.is_initialized() else 0
-        self.world_size = dist.get_world_size() if dist.is_initialized() else 1
-        
 
         # =========================================
         # shards (= paths to split data files)
@@ -46,11 +43,7 @@ class DataLoader:
         self.train_read_position = 0
         """
         
-        self.train_read_position = (
-            self.rank
-            * self.config.batch_size
-            * self.config.input_sequence_length
-        )
+        self.train_read_position = 0
         
 
         # =========================================
@@ -64,11 +57,7 @@ class DataLoader:
         self.val_read_position = 0
         """
         
-        self.val_read_position = (
-            self.rank
-            * self.config.batch_size
-            * self.config.input_sequence_length
-        )
+        self.val_read_position = 0
         
 
     def load_shard(self, shard_path):
@@ -101,17 +90,16 @@ class DataLoader:
             self.train_read_position += batch_size * sequence_length
             """
             
-            self.train_read_position += (batch_size * sequence_length * self.world_size)
+            self.train_read_position += (batch_size * sequence_length)
             
 
             # If the current shard does not have enough room for the next batch, move to the next shard.
-            if (self.train_read_position + batch_size * sequence_length * self.world_size + 1 
+            if (self.train_read_position + batch_size * sequence_length + 1
                 > len(self.train_shard_tokens)):
                 self.train_shard_index = (self.train_shard_index + 1) % len(self.train_shard_paths)
                 self.train_shard_tokens = self.load_shard(self.train_shard_paths[self.train_shard_index])
 
-                
-                self.train_read_position = (self.rank * batch_size * sequence_length)
+                self.train_read_position = 0
                 
 
         # -----------------------------------------
@@ -130,17 +118,16 @@ class DataLoader:
             self.val_read_position += batch_size * sequence_length
             """
             
-            self.val_read_position += (batch_size * sequence_length * self.world_size)
+            self.val_read_position += (batch_size * sequence_length)
             
 
             # If the current shard does not have enough room for the next batch, move to the next shard.
-            if (self.val_read_position + batch_size * sequence_length * self.world_size + 1
+            if (self.val_read_position + batch_size * sequence_length + 1
                 > len(self.val_shard_tokens)):
                 self.val_shard_index = (self.val_shard_index + 1) % len(self.val_shard_paths)
                 self.val_shard_tokens = self.load_shard(self.val_shard_paths[self.val_shard_index])
 
-                
-                self.val_read_position = (self.rank * batch_size * sequence_length)
+                self.val_read_position = 0
                 
 
         else:
