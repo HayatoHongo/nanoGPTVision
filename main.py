@@ -17,9 +17,9 @@ def main():
 
     # Model/optimization
     model = GPT(config=config)
-
     device = torch.device(config.device_type if torch.cuda.is_available() else "cpu")
     model = model.to(device)
+    # Call torch.compile only once
     model = torch.compile(model)
 
     # close to nanoGPT setting
@@ -31,7 +31,7 @@ def main():
     )
 
     # DataLoader
-    data_dir = os.environ.get("DATA_DIR", "/home/ubuntu/YOURFILESYSTEM") # ex: /home/ubuntu/virginia-filesystem
+    data_dir = os.environ.get("DATA_DIR", "/home/ubuntu/utah-filesystem") # ex: /home/ubuntu/virginia-filesystem
     data_loader = DataLoader(data_dir=data_dir, config=config)
 
     checkpoint_dir = os.environ.get("CKPT_DIR", "./checkpoints")

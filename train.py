@@ -35,11 +35,7 @@ import torch.nn.functional as F
 
 class Trainer:
     def __init__(self, model, optimizer, data_loader, config, checkpoint_dir):
-        ### NEW ###
-        # Call torch.compile only once: right after model creation and before training.
-        self.model = torch.compile(model)
-        ### NEW ###
-        
+        self.model = model
         self.optimizer = optimizer
         self.data_loader = data_loader
         self.config = config
@@ -89,10 +85,6 @@ class Trainer:
         input_batch, target_batch = self.data_loader.get_batch('train')
         self.optimizer.zero_grad()
 
-    def train_step(self):
-        input_batch, target_batch = self.data_loader.get_batch('train')
-        self.optimizer.zero_grad()
-
         ### NEW ###
         with torch.autocast(device_type=self.config.device_type, dtype=torch.bfloat16):
         ### NEW ###
@@ -107,7 +99,6 @@ class Trainer:
         ### NEW ###
         with torch.autocast(device_type=self.config.device_type, dtype=torch.bfloat16):
         ### NEW ###
-            self.model.eval()  # 評価モードに切り替え
             self.model.eval()  # switch to eval mode
             losses = {"train": [], "val": []} # compute losses for both train/val splits
             with torch.no_grad():

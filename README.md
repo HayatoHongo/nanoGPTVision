@@ -135,10 +135,6 @@ pip install -U huggingface_hub
 pip install torch numpy datasets tiktoken
 ```
 
-```bash
-pip install huggingface_hub
-```
-
 Replace YOURFILESYSTEM.
 
 ```bash
