@@ -152,8 +152,7 @@ snapshot_download(
 EOF
 ```
 
-### ⚠️ Replace YOURFILESYSTEM in main.py
-
+### ⚠️ Replace YOURFILESYSTEM in lune34, main.py
 
 ```bash
 python main.py
