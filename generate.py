@@ -14,7 +14,7 @@ def generate_with_stop(
     top_p=None,          # ### NEW ###
 ):
     """
-    Python側で stop を行う generator
+    Generator that enforces stopping (via `stop_ids`) on the Python side.
     """
     for token_id in model.generate(
         input_indices=input_indices,

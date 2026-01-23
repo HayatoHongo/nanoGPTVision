@@ -22,14 +22,14 @@ def setup_ddp():
 def main():
     config = ModelConfig()
 
-    # DDP init（ここで rank/world が確定）
+    # DDP init (rank/world are determined here)
     local_rank = setup_ddp()
 
-    # （任意）精度と速度の定番
+    # (Optional) common settings for accuracy and speed
     torch.backends.cuda.matmul.allow_tf32 = True
     torch.set_float32_matmul_precision("high")
 
-    # モデル/最適化
+    # Model/optimization
     model = GPT(config=config)
 
     ### NEW ###
@@ -48,7 +48,7 @@ def main():
         weight_decay=0.1,
     )
 
-    # DataLoader（DDP init後なので dist.get_rank() が使える）
+    # DataLoader (DDP is initialized, so dist.get_rank() is available)
     data_dir = os.environ.get("DATA_DIR", "/home/ubuntu/YOURFILESYSTEM") # os.environ.get("DATA_DIR", "/home/ubuntu/virginia-filesystem")
     data_loader = DataLoader(data_dir=data_dir, config=config)
 

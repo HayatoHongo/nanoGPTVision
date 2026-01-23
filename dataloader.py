@@ -9,10 +9,10 @@ import numpy as np
 class DataLoader:
     def __init__(self, data_dir, config):
         """
-        シャード化されたデータを順番に読むデータローダー。
+        A data loader that reads sharded data sequentially.
 
-        ※ shard という言葉を使っているが、
-        ※ 実体は「分割された .npy ファイルのパス」のリストにすぎない。
+        Note: We use the term "shard", but in practice it is simply a list of
+        paths to split `.npy` files.
         """
         self.config = config
         self.data_dir = data_dir
@@ -24,7 +24,7 @@ class DataLoader:
         
 
         # =========================================
-        # shard（= 分割されたデータファイルのパス）
+        # shards (= paths to split data files)
         # =========================================
 
         self.train_shard_paths = [
@@ -36,7 +36,7 @@ class DataLoader:
         ]
 
         # =========================================
-        # train 用の読み取り状態
+        # Read state for training
         # =========================================
 
         self.train_shard_index = 0
@@ -54,7 +54,7 @@ class DataLoader:
         
 
         # =========================================
-        # validation 用の読み取り状態
+        # Read state for validation
         # =========================================
 
         self.val_shard_index = 0
@@ -73,16 +73,14 @@ class DataLoader:
 
     def load_shard(self, shard_path):
         """
-        shard（= 1つの .npy ファイル）を読み込み、
-        torch.Tensor に変換する。
+        Load a shard (= one `.npy` file) and convert it to a `torch.Tensor`.
         """
         tokens_np = np.load(shard_path).astype(np.int32)
         return torch.tensor(tokens_np, dtype=torch.long)
 
     def get_batch(self, split):
         """
-        指定された split ('train' or 'val') から
-        次のバッチを順番に取り出す。
+        Return the next batch sequentially from the specified split ('train' or 'val').
         """
         batch_size = self.config.batch_size
         sequence_length = self.config.input_sequence_length
@@ -106,7 +104,7 @@ class DataLoader:
             self.train_read_position += (batch_size * sequence_length * self.world_size)
             
 
-            # 今のシャードに次回のバッチの余裕がなくなれば次のシャードへ
+            # If the current shard does not have enough room for the next batch, move to the next shard.
             if (self.train_read_position + batch_size * sequence_length * self.world_size + 1 
                 > len(self.train_shard_tokens)):
                 self.train_shard_index = (self.train_shard_index + 1) % len(self.train_shard_paths)
@@ -135,7 +133,7 @@ class DataLoader:
             self.val_read_position += (batch_size * sequence_length * self.world_size)
             
 
-            # 今のシャードに次回のバッチの余裕がなくなれば次のシャードへ
+            # If the current shard does not have enough room for the next batch, move to the next shard.
             if (self.val_read_position + batch_size * sequence_length * self.world_size + 1
                 > len(self.val_shard_tokens)):
                 self.val_shard_index = (self.val_shard_index + 1) % len(self.val_shard_paths)
@@ -149,7 +147,7 @@ class DataLoader:
             raise ValueError(f"split must be 'train' or 'val', got '{split}'")
 
         # -----------------------------------------
-        # バッチを返す
+        # Return batch
         # -----------------------------------------
         return (
             input_sequences.to(self.config.device_type),

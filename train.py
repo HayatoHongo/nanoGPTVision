@@ -1,5 +1,5 @@
 # train.py
-# torch.compile を追加
+# added torch.compile
 # refactored dataloader with train/val separation and DDP support
 import math
 
@@ -98,7 +98,7 @@ class Trainer:
         checkpoint_data = {
             "current_step": current_step,
             
-            # DDP の場合は module 側が実体
+            # Under DDP, the actual module lives on `model.module`.
             "model_state_dict": self.model.module.state_dict(),
             
             "optimizer_state_dict": self.optimizer.state_dict(),
@@ -121,10 +121,8 @@ class Trainer:
         
         checkpoint_data = torch.load(
             checkpoint_path,
-            map_location=f"cuda:{self.local_rank}" # DDP 対応
+            map_location=f"cuda:{self.local_rank}" # DDP compatibility
         )
-        
-
         
         self.model.module.load_state_dict(checkpoint_data["model_state_dict"])
         
@@ -152,7 +150,7 @@ class Trainer:
         self.optimizer.zero_grad()
 
         
-        # A100 前提で bf16 autocast
+        # bf16 autocast (assumes A100)
         with torch.autocast(device_type=self.config.device_type, dtype=self.config.autocast_dtype):
             logits, loss = self.model(input_batch, target_batch)
 
@@ -160,18 +158,18 @@ class Trainer:
         self.optimizer.step()
 
         
-        # DDP でも安全なように detach
+        # Detach to be safe under DDP
         return loss.detach().item()
         
 
     def evaluate(self):
         
-        # 評価は全 rank で同じ回数実行し、all_reduce で平均を取る
-        # （barrier不要：全プロセス同じ分岐・同じループ回数を通る前提）
+        # Run evaluation the same number of times on every rank, then average via all_reduce.
+        # (No barrier needed: assumes all processes take the same branches and loop counts.)
         with torch.autocast(device_type=self.config.device_type, dtype=self.config.autocast_dtype):
         
-            self.model.eval()  # 評価モードに切り替え
-            losses = {"train": [], "val": []} # 学習・検証データ両方の損失を計算
+            self.model.eval()  # switch to eval mode
+            losses = {"train": [], "val": []} # compute losses for both train/val splits
             with torch.no_grad():
                 for split in ['train', 'val']:
                     for _ in range(self.config.evaluation_loops):
@@ -183,14 +181,14 @@ class Trainer:
                         
                         losses[split].append(loss.detach())
                         
-            self.model.train()  # 再び学習モードへ戻す
+            self.model.train()  # switch back to train mode
 
         """ DELETE
         # 各データセット（train, val）での損失の平均を計算して返す
         return {split: sum(values) / len(values) for split, values in losses.items()}
         """
         
-        # DDP 平均（world_size で平均化）
+        # DDP mean (average over world_size)
         out = {}
         for split in ['train', 'val']:
             stacked = torch.stack(losses[split])  # (evaluation_loops,)
@@ -208,16 +206,16 @@ class Trainer:
         total_train_time = 0.0
         """
         
-        # 時間計測・ログは main プロセスだけが責任を持つ（DDP的に一貫）
+        # Timekeeping and logging are handled only by the main process (DDP-consistent).
         if self.is_main_process:
             last_eval_end_time = None
             total_train_time = 0.0
         
 
-        # (configで指定された回数+1)だけtrain_stepを実行する。
+        # Run train_step for (total_training_steps + 1) iterations.
         for step in range(self.start_step, self.config.total_training_steps + 1):
-            # 1回の学習ステップ（毎回行う主な処理）
-            # lrをupdateする
+            # One training step (main work done every iteration)
+            # update lr
             self.update_learning_rate(step)
             train_loss = self.train_step()
 
@@ -228,9 +226,9 @@ class Trainer:
                 if step > 0 and step % self.config.checkpoint_save_frequency == 0:
                     self.save_checkpoint(step)
 
-            # evaluation_frequency ごとに評価する。
+            # Evaluate every evaluation_frequency steps.
             if step % self.config.evaluation_frequency == 0:
-                # evaluate は all_reduce を使うので全 rank が必ず参加（安全）
+                # evaluate() uses all_reduce, so every rank must participate.
                 eval_loss = self.evaluate()
 
                 
@@ -247,7 +245,7 @@ class Trainer:
                         tokens_per_evaluation_interval = self.config.batch_size * self.config.input_sequence_length * self.config.evaluation_frequency
                         """
                         
-                        # グローバルに処理した token 数（DDP）
+                        # Globally processed token count (DDP)
                         tokens_per_evaluation_interval = (
                             self.config.batch_size
                             * self.config.input_sequence_length
@@ -290,10 +288,11 @@ class Trainer:
                     self.total_seen_tokens_list.append(total_seen_tokens)
                     self.total_train_time_list.append(total_train_time)
 
-                    # この評価が終わった時間を記録する。次の評価開始時との時間差が`evaluation_interval`となる。
+                    # Record the time this evaluation ended. The delta to the next evaluation start
+                    # becomes `evaluation_interval`.
                     last_eval_end_time = time.time()
 
-        # 学習が最後まで正常に終わった場合の最終モデル保存
+        # Save final model if training completes successfully
         
         if self.is_main_process:
         
