@@ -29,7 +29,7 @@ class ModelConfig:
     # In short: nobody truly knows the best learning rate for *your* model. Just try different values.
     # As for this ~500MB model, with batch size 256 (A100x8 setting), I found:
     # max lr: 1e-2: loss diverges. 1e-3 : good, 1e-4 : too slow compared to 1e-3
-    # This time, with batch size 32, learning rate is scaled down.
+    # This time, with batch size 48, learning rate is scaled down by about 5x from 256 batch size setting.
     
     max_learning_rate: float = 2e-4
     min_learning_rate: float = 2e-5
