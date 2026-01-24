@@ -5,10 +5,10 @@ from dataclasses import dataclass
 class ModelConfig:
     # === training ===
     # Single-device setup: global batch size == batch_size
-    batch_size: int = 32 # 16 is equivalent to about 25 GB VRAM usage. 
-    total_training_steps: int = 35_000
+    batch_size: int = 48 # 16 is equivalent to about 25 GB VRAM usage. 
+    total_training_steps: int = 200_000
     evaluation_frequency: int = 100
-    checkpoint_save_frequency: int = 5_000
+    checkpoint_save_frequency: int = 10_000
     evaluation_loops: int = 10
 
     # === sequence ===
@@ -31,8 +31,8 @@ class ModelConfig:
     # max lr: 1e-2: loss diverges. 1e-3 : good, 1e-4 : too slow compared to 1e-3
     # This time, with batch size 32, learning rate is scaled down.
     
-    max_learning_rate: float = 1e-4
-    min_learning_rate: float = 1e-5
+    max_learning_rate: float = 2e-4
+    min_learning_rate: float = 2e-5
     warmup_steps: int = 1_000
 
     # === system ===
