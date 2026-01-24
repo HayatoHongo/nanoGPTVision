@@ -38,11 +38,6 @@ class DataLoader:
 
         self.train_shard_index = 0
         self.train_shard_tokens = self.load_shard(self.train_shard_paths[self.train_shard_index])
-
-        """ DELETE code
-        self.train_read_position = 0
-        """
-        
         self.train_read_position = 0
         
 
@@ -52,11 +47,6 @@ class DataLoader:
 
         self.val_shard_index = 0
         self.val_shard_tokens = self.load_shard(self.val_shard_paths[self.val_shard_index])
-
-        """ DELETE code
-        self.val_read_position = 0
-        """
-        
         self.val_read_position = 0
         
 
@@ -86,11 +76,7 @@ class DataLoader:
             input_sequences = chunk[:-1].view(batch_size, sequence_length)
             target_sequences = chunk[1:].view(batch_size, sequence_length)
 
-            """ DELETE code
             self.train_read_position += batch_size * sequence_length
-            """
-            
-            self.train_read_position += (batch_size * sequence_length)
             
 
             # If the current shard does not have enough room for the next batch, move to the next shard.
@@ -98,8 +84,8 @@ class DataLoader:
                 > len(self.train_shard_tokens)):
                 self.train_shard_index = (self.train_shard_index + 1) % len(self.train_shard_paths)
                 self.train_shard_tokens = self.load_shard(self.train_shard_paths[self.train_shard_index])
-
                 self.train_read_position = 0
+                print("[INFO] Switched to train shard:", self.train_shard_paths[self.train_shard_index])
                 
 
         # -----------------------------------------
@@ -114,11 +100,7 @@ class DataLoader:
             input_sequences = chunk[:-1].view(batch_size, sequence_length)
             target_sequences = chunk[1:].view(batch_size, sequence_length)
 
-            """ DELETE code
             self.val_read_position += batch_size * sequence_length
-            """
-            
-            self.val_read_position += (batch_size * sequence_length)
             
 
             # If the current shard does not have enough room for the next batch, move to the next shard.
@@ -126,8 +108,8 @@ class DataLoader:
                 > len(self.val_shard_tokens)):
                 self.val_shard_index = (self.val_shard_index + 1) % len(self.val_shard_paths)
                 self.val_shard_tokens = self.load_shard(self.val_shard_paths[self.val_shard_index])
-
                 self.val_read_position = 0
+                print("[INFO] Switched to val shard:", self.val_shard_paths[self.val_shard_index])
                 
 
         else:
